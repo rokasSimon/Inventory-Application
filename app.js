@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
+const categoryRouter = require('./routes/category');
+const productRouter = require('./routes/product');
 
 const mongoose = require('mongoose');
 const connectionString = 'mongodb://localhost:27017/pc_store';
@@ -25,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/category', categoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

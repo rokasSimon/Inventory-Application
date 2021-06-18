@@ -10,10 +10,10 @@ const CategorySchema = new Schema(
     }
 );
 
-ProductSchema
+CategorySchema
     .virtual('url')
     .get(function() {
         return `/category/${this._id}`;
     });
 
-module.exports = mongoose.model('Product', ProductSchema);
+module.exports = mongoose.model('Category', CategorySchema);
