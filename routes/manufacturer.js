@@ -5,45 +5,41 @@ const Manufacturer = require('../models/manufacturer');
 
 router.get('/', async function(req, res) {
     try {
-        const allCategories = await Category.find({}).exec();
+        const allManufacturer = await Manufacturer.find({}).exec();
 
-        if (allCategories.length == 0) {
-            allCategories = null;
-        }
-
-        res.render('category/index', { categories: allCategories, title: 'All Categories' });
+        res.render('manufacturer/index', { manufacturers: allManufacturer, title: 'All Manufacturers' });
     } catch (err) {
-        console.log('Could not execute find all categories.');
+        console.log('Could not execute find all manufacturers.');
         //res.status(500);
-        res.render('category/index', { categories: null, title: 'All Categories' });
+        res.render('manufacturer/index', { manufacturers: [], title: 'All Manufacturers' });
     }
 });
 
 router.get('/create', async function(req, res) {
-    res.render('category/create', { title: 'Creating Category', failure: false, description: "" });
+    res.render('manufacturer/create', { title: 'Creating Manufacturer', failure: false, description: "" });
 });
 
 router.post('/create', async function(req, res, next) {
     const data = req.body;
 
     if (!data.name) {
-        console.log('Name was not provided for category.');
-        res.render('category/create', { title: 'Creating Category', failure: true, description: data.description });
+        console.log('Name was not provided for manufacturer.');
+        res.render('manufacturer/create', { title: 'Creating Manufacturer', failure: true, description: data.description });
     }
     else {
-        const newCateg = new Category({
+        const newMan = new Manufacturer({
             name: data.name,
             description: data.description,
             products: []
         });
 
-        newCateg.save(function(err) {
+        newMan.save(function(err) {
             if (err) {
                 return next(err);
             }
         });
 
-        res.redirect('/category');
+        res.redirect('/manufacturer');
     }
 });
 
@@ -51,13 +47,11 @@ router.get('/:id', async function(req, res, next) {
     const id = req.params.id;
 
     try {
-        const category = await Category.findById(id)
-            .populate('products products.manufacturer')
+        const manufacturer = await Manufacturer.findById(id)
+            .populate('products')
             .exec();
 
-        console.log(category);
-
-        res.render('category/details', { id: id, title: 'Category Details', category: category })
+        res.render('manufacturer/details', { id: id, title: 'Manufacturer Details', manufacturer: manufacturer })
 
     } catch (err) {
         return next(err);
@@ -68,9 +62,9 @@ router.get('/delete/:id', async function(req, res, next) {
     const id = req.params.id;
 
     try {
-        const category = await Category.findById(id).exec();
+        const manufacturer = await Manufacturer.findById(id).exec();
 
-        res.render('category/delete', { title: 'Category Deletion', category: category })
+        res.render('manufacturer/delete', { title: 'Manufacturer Deletion', manufacturer: manufacturer })
     } catch (err) {
         return next(err);
     }
@@ -80,18 +74,14 @@ router.post('/delete/:id', async function(req, res, next) {
     const id = req.params.id;
 
     try {
-        const category = await Category.findById(id).exec();
+        const manufacturer = await Manufacturer.findById(id).exec();
 
-        await Product.deleteMany({
-            _id: { $in: category.products }
-        });
-
-        await category.remove(function (err) {
-            console.log('Error deleting category');
+        await manufacturer.remove(function (err) {
+            console.log('Error deleting manufacturer');
             return next(err);
         });
 
-        res.redirect('/category');
+        res.redirect('/manufacturer');
     } catch (err) {
         return next(err);
     }
@@ -101,9 +91,9 @@ router.get('/edit/:id', async function(req, res, next) {
     const id = req.params.id;
 
     try {
-        const category = await Category.findById(id).exec();
+        const manufacturer = await Manufacturer.findById(id).exec();
 
-        res.render('category/edit', { title: 'Editing Category', category: category, failure: false })
+        res.render('manufacturer/edit', { title: 'Editing Manufacturer', manufacturer: manufacturer, failure: false })
     } catch (err) {
         return next(err);
     }
@@ -114,19 +104,19 @@ router.post('/edit/:id', async function(req, res, next) {
     const data = req.body;
 
     try {
-        const category = await Category.findById(id).exec();
+        const manufacturer = await Manufacturer.findById(id).exec();
 
         if (!data.name) {
-            res.render('category/edit', {title: 'Editing Category', category: category, failure: true});
+            res.render('manufacturer/edit', {title: 'Editing Manufacturer', manufacturer: manufacturer, failure: true});
         }
         else
         {
-            category.name = data.name;
-            category.description = data.description;
+            manufacturer.name = data.name;
+            manufacturer.description = data.description;
 
-            await category.save();
+            await manufacturer.save();
 
-            res.render('category/details', { id: id, title: 'Category Details', category: category })
+            res.render('manufacturer/details', { id: id, title: 'Manufacturer Details', manufacturer: manufacturer })
         }
     } catch (err) {
         return next(err);

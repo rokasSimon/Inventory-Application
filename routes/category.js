@@ -8,15 +8,11 @@ router.get('/', async function(req, res) {
     try {
         const allCategories = await Category.find({}).exec();
 
-        if (allCategories.length == 0) {
-            allCategories = null;
-        }
-
         res.render('category/index', { categories: allCategories, title: 'All Categories' });
     } catch (err) {
         console.log('Could not execute find all categories.');
         //res.status(500);
-        res.render('category/index', { categories: null, title: 'All Categories' });
+        res.render('category/index', { categories: [], title: 'All Categories' });
     }
 });
 

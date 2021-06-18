@@ -9,6 +9,10 @@ const ProductSchema = new Schema(
         price: { type: Number, required: true },
         stock: { type: Number, required: true, default: 0 },
         features: { type: [String] },
+        image: {
+            data: Buffer,
+            contentType: String
+        },
 
         category: { type: Schema.Types.ObjectId, ref: 'Category', required: true }
     }
@@ -17,7 +21,7 @@ const ProductSchema = new Schema(
 ProductSchema
     .virtual('url')
     .get(function() {
-        return `/manga/${this._id}`;
+        return `/product/${this._id}`;
     });
 
 module.exports = mongoose.model('Product', ProductSchema);

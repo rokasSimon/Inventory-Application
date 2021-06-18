@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/category-details.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <%- include('../layout/header'); -%>
+    <div class="content">
+        <h1><%= title %></h1>
+        <h2><%= manufacturer.name %></h2>
+        <div class="button-group">
+            <a href="/manufacturer/edit/<%= id %>">Edit</a>
+            <a href="/manufacturer/delete/<%= id %>">Delete</a>
+        </div>
+        <p class="description"><%= manufacturer.description %></p>
+        <h2>Products from <%= manufacturer.name %></h2>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Stock</th>
+                <th>Price</th>
+            </thead>
+            <tbody>
+                <% if (manufacturer.products.length == 0) { %>
+                    <tr>
+                        <td colspan="4" id="no-listing">This manufacturer has no products</td>
+                    </tr>
+                <% } %>
+                <% for(const product of (manufacturer.products.length == 0 ? [] : manufacturer.products)) { %>
+                    <tr>
+                        <td><a href="<%= product.url %>"><%= product.name %></a></td>
+                        <td><%= product.stock %></td>
+                        <td><%= product.price %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <%- include('../layout/footer'); -%>
+  </body>
+</html>

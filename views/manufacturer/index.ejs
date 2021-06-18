@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/category-list.css" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/fc1819c339.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <%- include('../layout/header'); -%>
+    <div class="content">
+        <h1><%= title %></h1>
+        <a class="add-button" href="/manufacturer/create"><i class="fas fa-plus"></i> Add New Manufacturer</a>
+        <% if (manufacturers.length == 0) { %>
+            <p>No Manufacturers were loaded</p>
+        <% } %>
+        <div class="category-grid">
+            <% for(const manufacturer of (manufacturers.length == 0 ? [] : manufacturers)) { %>
+                <a class="category-block" href="<%= manufacturer.url %>"><%= manufacturer.name %></a>
+            <% } %>
+        </div>
+    </div>
+    <%- include('../layout/footer'); -%>
+  </body>
+</html>
