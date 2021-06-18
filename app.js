@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 const categoryRouter = require('./routes/category');
 const productRouter = require('./routes/product');
+const manufacturerRouter = require('./routes/manufacturer');
 
 const mongoose = require('mongoose');
 const connectionString = 'mongodb://localhost:27017/pc_store';
@@ -28,6 +29,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/category', categoryRouter);
+app.use('/product', productRouter);
+app.use('/manufacturer', manufacturerRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

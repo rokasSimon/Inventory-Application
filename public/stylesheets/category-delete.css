@@ -1,0 +1,19 @@
+h2 {
+    color: var(--ac-txt2);
+}
+
+input[type="submit"] {
+    margin: 0 var(--link-dist);
+    padding: var(--link-dist) calc(2 * var(--link-dist));
+
+    border: 1px solid var(--bo-col);
+    border-radius: 5px;
+
+    color: var(--l-txt);
+    background-color: var(--m-bg);
+}
+
+input[type="submit"]:hover {
+    background-color: var(--lh-bg);
+    color: var(--l-txt);
+  }

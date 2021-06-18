@@ -12,11 +12,11 @@
     <div class="content">
         <h1><%= title %></h1>
         <a class="add-button" href="/category/create"><i class="fas fa-plus"></i> Add New Category</a>
-        <% if (categories.length == 0) { %>
+        <% if (!categories) { %>
             <p>No categories were loaded</p>
         <% } %>
         <div class="category-grid">
-            <% for(const category of (categories.length == 0 ? [] : categories)) { %>
+            <% for(const category of categories) { %>
                 <a class="category-block" href="<%= category.url %>"><%= category.name %></a>
             <% } %>
         </div>

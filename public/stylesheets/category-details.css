@@ -1,0 +1,50 @@
+.description {
+    max-width: 50%;
+    padding: 1rem;
+
+    border: 1px solid var(--bo-col);
+    border-radius: 5px;
+
+    background-color: var(--s-bg3);
+}
+
+.button-group {
+    margin: 1rem 0rem;
+}
+
+.button-group > a {
+    margin: 0 var(--link-dist);
+    padding: var(--link-dist) calc(2 * var(--link-dist));
+  
+    border: 1px solid var(--bo-col);
+    border-radius: 5px;
+  
+    background-color: var(--m-bg);
+  }
+  
+.button-group > a:hover {
+    background-color: var(--lh-bg);
+    color: var(--l-txt);
+}
+
+table {
+    min-width: 40%;
+}
+
+#no-listing {
+    padding: 1.5rem;
+    color: var(--ac-txt1);
+}
+
+td {
+    text-align: center;
+}
+
+th {
+    padding: 1rem;
+    border-bottom: 1px solid var(--bo-col);
+}
+
+h2 {
+    color: var(--ac-txt2);
+}
