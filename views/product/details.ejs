@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/product-details.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <%- include('../layout/header'); -%>
+    <div class="content">
+        <h1><%= product.name %></h1>
+        <div class="button-group">
+            <a href="/product/edit/<%= product._id %>">Edit</a>
+            <a href="/product/delete/<%= product._id %>">Delete</a>
+        </div>
+        <img src="data:image/<%= product.image.contentType %>;base64,<%= product.image.data.toString('base64') %>" />
+        <p class="description" style="display: <%= product.description == "" ? "none" : "block" %>;">
+            <%= product.description %>
+        </p>
+        <div class="details">
+            <div class="detail-block">
+                <p class="label">Manufacturer</p>
+                <a class="detail-value" href="<%= product.manufacturer.url %>"><%= product.manufacturer.name %></a>
+            </div>
+            <div class="detail-block">
+                <p class="label">Category</p>
+                <a class="detail-value" href="<%= product.category.url %>"><%= product.category.name %></a>
+            </div>
+            <div class="detail-block">
+                <p class="label">Price</p>
+                <p class="detail-value"><%= product.price %></p>
+            </div>
+            <div class="detail-block">
+                <p class="label">Stock</p>
+                <p class="detail-value"><%= product.stock %></p>
+            </div>
+        </div>
+        <h2>Features:</h2>
+        <div class="features">
+            <% for(const feature of product.features) { %>
+                <p class="feature"><%= feature %></p>
+            <% } %>
+        </div>
+    </div>
+    <%- include('../layout/footer'); -%>
+  </body>
+</html>

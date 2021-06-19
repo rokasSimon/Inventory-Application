@@ -1,0 +1,83 @@
+.description {
+    max-width: 30%;
+    padding: 1rem;
+
+    border: 1px solid var(--bo-col);
+    border-radius: 5px;
+
+    background-color: var(--s-bg3);
+}
+
+.button-group {
+    display: flex;
+    flex-flow: row wrap;
+
+    margin: 1rem 0rem;
+}
+
+.button-group > a {
+    margin: 0 var(--link-dist);
+    padding: var(--link-dist) calc(2 * var(--link-dist));
+
+    border: 1px solid var(--bo-col);
+    border-radius: 5px;
+  
+    background-color: var(--m-bg);
+  }
+  
+.button-group > a:hover {
+    background-color: var(--lh-bg);
+    color: var(--l-txt);
+}
+
+img {
+    margin: 1rem 0rem;
+
+    max-width: 350px;
+    max-height: 350px;
+}
+
+.details {
+    display: flex;
+    flex-flow: row wrap;
+
+    justify-content: space-evenly;
+    align-content: center;
+
+    border: 1px solid var(--bo-col);
+    border-radius: 5px;
+
+    background-color: var(--s-bg3);
+}
+
+.detail-block {
+    flex-grow: 1;
+    flex-shrink: 0;
+    margin: 0 1rem;
+}
+
+.label {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.detail-value {
+    font-size: 1.2rem;
+    margin-top: 0;
+}
+
+.features {
+    border: 1px solid var(--bo-col);
+    border-radius: 5px;
+
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature {
+    padding: 0.25rem;
+}
+
+.feature:not(:last-of-type) {
+    border-bottom: 1px solid var(--bo-col);
+}

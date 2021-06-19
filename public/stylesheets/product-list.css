@@ -1,0 +1,20 @@
+table {
+    min-width: 40%;
+}
+
+#no-listing {
+    padding: 1.5rem;
+    color: var(--ac-txt1);
+}
+
+td {
+    text-align: center;
+    font-size: 1.1rem;
+
+    padding: 0.5rem;
+}
+
+th {
+    padding: 1rem;
+    border-bottom: 1px solid var(--bo-col);
+}

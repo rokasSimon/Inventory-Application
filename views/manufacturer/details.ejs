@@ -29,7 +29,7 @@
                         <td colspan="4" id="no-listing">This manufacturer has no products</td>
                     </tr>
                 <% } %>
-                <% for(const product of (manufacturer.products.length == 0 ? [] : manufacturer.products)) { %>
+                <% for(const product of manufacturer.products) { %>
                     <tr>
                         <td><a href="<%= product.url %>"><%= product.name %></a></td>
                         <td><%= product.stock %></td>

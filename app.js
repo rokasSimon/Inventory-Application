@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const multer = require('multer');
 
 var indexRouter = require('./routes/index');
 const categoryRouter = require('./routes/category');
@@ -15,6 +16,8 @@ mongoose.connect(connectionString, { useNewUrlParser: true , useUnifiedTopology:
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+global.appRoot = path.resolve(__dirname);
+
 var app = express();
 
 // view engine setup
@@ -26,12 +29,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
 app.use('/category', categoryRouter);
 app.use('/product', productRouter);
 app.use('/manufacturer', manufacturerRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

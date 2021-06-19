@@ -34,7 +34,7 @@ router.post('/create', async function(req, res, next) {
             products: []
         });
 
-        newCateg.save(function(err) {
+        await newCateg.save(function(err) {
             if (err) {
                 return next(err);
             }
@@ -49,10 +49,14 @@ router.get('/:id', async function(req, res, next) {
 
     try {
         const category = await Category.findById(id)
-            .populate('products products.manufacturer')
+            .populate({
+                path: 'products',
+                populate: {
+                    path: 'manufacturer',
+                    model: 'Manufacturer'
+                }
+            })
             .exec();
-
-        console.log(category);
 
         res.render('category/details', { id: id, title: 'Category Details', category: category })
 
