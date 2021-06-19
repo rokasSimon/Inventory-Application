@@ -14,28 +14,34 @@
             <a href="/product/edit/<%= product._id %>">Edit</a>
             <a href="/product/delete/<%= product._id %>">Delete</a>
         </div>
-        <% if (product.image.data) { %>
-            <img src="data:image/<%= product.image.contentType %>;base64,<%= product.image.data.toString('base64') %>" />
-        <% } %>
-        <p class="description" style="display: <%= product.description == "" ? "none" : "block" %>;">
-            <%= product.description %>
-        </p>
-        <div class="details">
-            <div class="detail-block">
-                <p class="label">Manufacturer</p>
-                <a class="detail-value" href="<%= product.manufacturer.url %>"><%= product.manufacturer.name %></a>
+        <div class="main-details">
+            <div class="image-block">
+                <% if (product.image.data) { %>
+                    <img src="data:image/<%= product.image.contentType %>;base64,<%= product.image.data.toString('base64') %>" />
+                <% } else { %>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Missing-image-232x150.png" />
+                <% } %>
             </div>
-            <div class="detail-block">
-                <p class="label">Category</p>
-                <a class="detail-value" href="<%= product.category.url %>"><%= product.category.name %></a>
-            </div>
-            <div class="detail-block">
-                <p class="label">Price</p>
-                <p class="detail-value"><%= product.price %></p>
-            </div>
-            <div class="detail-block">
-                <p class="label">Stock</p>
-                <p class="detail-value"><%= product.stock %></p>
+            <p class="description" style="display: <%= product.description == "" ? "none" : "block" %>;">
+                <%= product.description %>
+            </p>
+            <div class="details">
+                <div class="detail-block">
+                    <p class="label">Manufacturer</p>
+                    <a class="detail-value" href="<%= product.manufacturer.url %>"><%= product.manufacturer.name %></a>
+                </div>
+                <div class="detail-block">
+                    <p class="label">Category</p>
+                    <a class="detail-value" href="<%= product.category.url %>"><%= product.category.name %></a>
+                </div>
+                <div class="detail-block">
+                    <p class="label">Price</p>
+                    <p class="detail-value"><%= product.price %></p>
+                </div>
+                <div class="detail-block">
+                    <p class="label">Stock</p>
+                    <p class="detail-value"><%= product.stock %></p>
+                </div>
             </div>
         </div>
         <h2>Features:</h2>

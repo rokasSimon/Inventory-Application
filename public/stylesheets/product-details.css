@@ -1,5 +1,8 @@
 .description {
-    max-width: 30%;
+    grid-area: description;
+
+    width: 100%;
+    height: 100%;
     padding: 1rem;
 
     border: 1px solid var(--bo-col);
@@ -30,14 +33,39 @@
     color: var(--l-txt);
 }
 
-img {
-    margin: 1rem 0rem;
+.main-details {
+    display: grid;
+    grid-template-areas:
+        "image details"
+        "image description"
+        "image description"
+        "image description"
+        "image description";
 
+    column-gap: 1rem;
+    row-gap: 0.25rem;
+
+    margin-bottom: 2rem;
+}
+
+.image-block {
+    grid-area: image;
+
+    margin: 1rem 0rem 1rem 0rem;
+    padding: calc(2 * var(--link-dist));
+
+    border: 1px solid var(--bo-col);
+    border-radius: 5px;
+}
+
+img {
     max-width: 350px;
     max-height: 350px;
 }
 
 .details {
+    grid-area: details;
+
     display: flex;
     flex-flow: row wrap;
 
@@ -67,6 +95,10 @@ img {
 }
 
 .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1rem;
+
     border: 1px solid var(--bo-col);
     border-radius: 5px;
 
