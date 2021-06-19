@@ -45,8 +45,6 @@ router.get('/create', async function (req, res, next) {
 router.post('/create', upload.single('image'), async function (req, res, next) {
     const data = req.body;
 
-    console.log(req.file);
-
     let validationErrors = [];
 
     if (!data.name) validationErrors.push('No name provided');
@@ -75,6 +73,18 @@ router.post('/create', upload.single('image'), async function (req, res, next) {
         const manufacturer = await Manufacturer.findById(data.manufacturer);
         const category = await Category.findById(data.category);
 
+        let image;
+
+        if (!req.file) {
+            image = null;
+        }
+        else {
+            image = {
+                data: fs.readFileSync(path.join(appRoot + '/uploads/' + req.file.filename)),
+                contentType: 'image/png'
+            };
+        }
+
         if (manufacturer && category) {
             let newProduct = new Product({
                 name: data.name,
@@ -82,10 +92,7 @@ router.post('/create', upload.single('image'), async function (req, res, next) {
                 price: data.price,
                 stock: data.stock,
                 features: data.features.split(';'),
-                image: {
-                    data: fs.readFileSync(path.join(appRoot + '/uploads/' + req.file.filename)),
-                    contentType: 'image/png'
-                },
+                image: image,
 
                 manufacturer: manufacturer,
                 category: category
@@ -129,7 +136,39 @@ router.get('/:id', async function (req, res, next) {
     try {
         const product = await Product.findById(id).populate('manufacturer category').exec();
 
+        console.log(product);
+
         res.render('product/details', { title: 'Product details', product: product });
+    } catch (err) {
+        return next(err);
+    }
+});
+
+router.get('/delete/:id', async function (req, res, next) {
+    const id = req.params.id;
+
+    try {
+        const product = await Product.findById(id).exec();
+
+        res.render('product/delete', { title: 'Deleting Product', product: product });
+    } catch (err) {
+        return next(err);
+    }
+});
+
+router.post('/delete/:id', async function (req, res, next) {
+    const id = req.params.id;
+
+    try {
+        const product = await Product.findById(id).exec();
+
+        await product.remove(function (err) {
+            if (err) {
+                return next(err);
+            }
+        });
+
+        res.redirect('/product');
     } catch (err) {
         return next(err);
     }

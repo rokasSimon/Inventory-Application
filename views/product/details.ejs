@@ -14,7 +14,9 @@
             <a href="/product/edit/<%= product._id %>">Edit</a>
             <a href="/product/delete/<%= product._id %>">Delete</a>
         </div>
-        <img src="data:image/<%= product.image.contentType %>;base64,<%= product.image.data.toString('base64') %>" />
+        <% if (product.image.data) { %>
+            <img src="data:image/<%= product.image.contentType %>;base64,<%= product.image.data.toString('base64') %>" />
+        <% } %>
         <p class="description" style="display: <%= product.description == "" ? "none" : "block" %>;">
             <%= product.description %>
         </p>

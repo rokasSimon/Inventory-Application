@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/category-delete.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <%- include('../layout/header'); -%>
+    <div class="content">
+        <h1><%= title %></h1>
+        <h2>Deleting <%= product.name %></h2>
+        <form method="POST">
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+    <%- include('../layout/footer'); -%>
+  </body>
+</html>
